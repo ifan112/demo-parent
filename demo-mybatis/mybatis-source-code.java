@@ -46,7 +46,38 @@ SqlSessionFactory sqlSessionFactory = new SqlSessionFactory().build(in) {
                 parseConfiguration(XNode root = parser.evalNode("/configuration")) {
                     try {
                         // 解析properties节点
-                        propertiesElement(XNode context = root.evalNode("properties"));
+                        propertiesElement(XNode context = root.evalNode("properties")) {
+                            if (context != null) {
+                                // 如果properties节点内容不为空
+                                // 获取在配置文件中properties节点下所有属性列表
+                                Properties defaults = context.getChildrenAsProperties();
+
+                                // 获取properties节点的resource和url属性，从外部文件获取属性列表
+                                String resource = context.getStringAttribute("resource");
+                                String url = context.getStringAttribute("url");
+                                if (resource != null && url != null) {
+                                    // 不可以同时指定resource和url。这里抛出异常
+                                }
+                                // 合并从外部文件获取属性列表
+                                if (resource != null) {
+                                    defaults.putAll(Resources.getResourceAsProperties(resource));
+                                }
+                                if (url != null) {
+                                    defaults.putAll(Resources.getUrlAsProperties(url));
+                                }
+
+                                // 合并开发者通过编码指定的属性列表
+                                Properites vars = configuration.getVariables();
+                                if (vars != null) {
+                                    defaults.putAll(vars);
+                                }
+                                // 此时，已经合并了从配置文件、外部文件和开发者指定的所有属性列表
+                                // 此后，在配置文件中，可以通过 ${属性} 来引用获取指定的属性值
+                                // 开发者可以通过调用sqlSessionFactory.getConfiguration().getVariables()来获取属性列表
+                                parser.setVariables(defaults);
+                                configuration.setVariables(defaults);
+                            }
+                        };
 
                         // 解析settings节点
                         Properties settings = settingsAsProperties(root.evalNode(settings));

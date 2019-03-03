@@ -5,6 +5,15 @@
 
 <configuration>
 
+    <!--
+        通过resource属性引入了外部属性文件，mybatis将会加载此文件中的属性列表
+        同时，在该节点中也设置了两个属性的值
+        最后，开发者在构造XMLConfigBuilder时传入了自定义的Properties
+
+        mybatis将会合并这三处的所有属性列表。此后，可以通过 ${属性名} 来获取指定属性的值
+
+        正如在下面dataSource节点中，通过${url}来获取数据库地址，以构造数据库连接池
+    -->
     <properties resource="db.properties">
         <property name="username" value="root"/>
         <property name="password" value="123456"/>
