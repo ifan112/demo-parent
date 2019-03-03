@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </properties>
+
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+    </settings>
+
+    <typeAliases>
+        <package name="com.ifan112.demo.mybatis.entity"/>
+    </typeAliases>
+
+    <!--<typeHandlers>-->
+    <!--<typeHandler handler="" javaType="" jdbcType="" />-->
+    <!--</typeHandlers>-->
+
+    <!--<plugins>-->
+    <!--<plugin interceptor="com.king.demo.mybatis.ExamplePlugin">-->
+    <!--<property name="a" value="11" />-->
+    <!--</plugin>-->
+    <!--</plugins>-->
+
+    <!-- 多环境配置 -->
+    <environments default="development">
+
+        <environment id="development">
+            <!-- 事务管理器 -->
+            <transactionManager type="JDBC"/>
+            <!-- 数据源 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+
+    </environments>
+
+    <mappers>
+        <!-- 如果想要同时使用Mapper接口、Mapper文件，
+             则这里只能添加mapper文件，而不能再添加package节点。
+        -->
+        <mapper resource="mappers/user-mapper.xml"/>
+
+        <!--<package name="com.king.demo.mybatis.mapper" />-->
+    </mappers>
+
+</configuration>
