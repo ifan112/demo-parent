@@ -32,14 +32,22 @@ public class DemoMybatisApplication {
          * 2. 配置文件中properties节点的resource/url属性指定的外部文件
          * 3. 开发者在构建SqlSessionFactory时指定的属性列表
          *
+         * 由于后面指定的属性会覆盖前面指定的属性，因此，属性值的优先顺序从小到大是：
+         * properties节点下属性值 < 外部文件中属性值 < 开发者传入的Properties中的属性值
+         *
          * 为了演示这一项特性，分别在：
          * 1. 配置文件中properties节点下设置了username和password属性值
          * 2. 配置文件中properties节点的resource属性指定了引入的外部文件地址为db.properties，并在该文件中设置了driver属性值
          * 3. 最后，构造SqlSessionFactory时，传入了url属性值
+         * 4. 在外部文件db.properties中，设置url属性值为非法的数据库地址。不过，3中的属性值将会覆盖它，保证该属性值合法可用
          *
          * mybatis合并这三处的所有属性。此后，在配置文件中可以通过 ${属性名称} 来获取到这些属性的值
          *
+         * mybatis在解析xml配置文件时，逐个获取xml节点。如果该节点是text类型，则判断该节点的值是否是${属性名}格式的占位符
+         * 如果是，则解析该占位符，获取属性列表中指定属性值
+         *
          * 源码：{@link org.apache.ibatis.builder.xml.XMLConfigBuilder#propertiesElement(XNode)}
+         *      {@link org.apache.ibatis.parsing.PropertyParser#parse(String, Properties)}
          */
         Properties customerProps = new Properties();
         customerProps.setProperty("url", "jdbc:mysql://localhost:3306/test?useSSL=true");
