@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 自动扫描和注册Service等组件。Spring自身是不能识别Mapper将其用作组件的 -->
+    <context:component-scan base-package="com.ifan112.demo.mybatis.spring.service"/>
+
+    <!-- 读取属性文件。声明数据库连接池时通过占位符引用这些属性 -->
+    <context:property-placeholder location="db.properties"/>
+
+    <!-- 声明数据库连接池 -->
+    <bean id="dataSource" class="org.apache.ibatis.datasource.unpooled.UnpooledDataSource">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+    </bean>
+
+    <!-- SqlSessionFactoryBean是一个FactoryBean，用于SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 创建SqlSessionFactory时一定需要知道dataSource和Mapper文件。其余设置将会保持默认 -->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mappers/*"/>
+    </bean>
+
+    <!-- Mapper扫描器配置。
+         在扫描到指定包下的Mapper之后，通过上面创建的SqlSessionFactory对象获取SqlSession，然后创建Mapper的动态代理对象，并注册到Spring中。
+         当有其它组件依赖Mapper时，Spring就可以自定注入它所依赖的Mapper的动态代理对象了。
+     -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- Mapper所在包 -->
+        <property name="basePackage" value="com.ifan112.demo.mybatis.spring.mapper"/>
+    </bean>
+
+</beans>
