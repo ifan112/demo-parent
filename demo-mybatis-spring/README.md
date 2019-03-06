@@ -169,7 +169,7 @@ src/main/
 
 #### 编码
 
-Entity、Mapper、Service等代码内容参考源码
+Entity、Mapper、Service等代码内容[参考源码](https://github.com/ifan112/demo-parent/tree/49feb31199855bdb8adf83fcde1a9bfc2da4b16f/demo-mybatis-spring)
 
 
 
