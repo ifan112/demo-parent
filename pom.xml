@@ -10,6 +10,7 @@
     <modules>
         <module>demo-mybatis</module>
         <module>demo-mybatis-spring</module>
+        <module>demo-rocketmq</module>
     </modules>
     <packaging>pom</packaging>
 
