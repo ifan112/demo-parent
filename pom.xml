@@ -11,6 +11,7 @@
         <module>demo-mybatis</module>
         <module>demo-mybatis-spring</module>
         <module>demo-rocketmq</module>
+        <module>demo-jersey</module>
     </modules>
     <packaging>pom</packaging>
 
