@@ -13,6 +13,7 @@
         <module>demo-rocketmq</module>
         <module>demo-nacos</module>
         <module>demo-nacos-spring</module>
+        <module>demo-netflix-ribbon</module>
     </modules>
     <packaging>pom</packaging>
 
