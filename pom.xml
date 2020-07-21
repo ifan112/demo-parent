@@ -11,6 +11,8 @@
         <module>demo-mybatis</module>
         <module>demo-mybatis-spring</module>
         <module>demo-rocketmq</module>
+        <module>demo-nacos</module>
+        <module>demo-nacos-spring</module>
     </modules>
     <packaging>pom</packaging>
 
