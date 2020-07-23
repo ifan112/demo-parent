@@ -16,6 +16,7 @@
         <module>demo-netflix-ribbon</module>
         <module>demo-jersey</module>
         <module>demo-webapp</module>
+        <module>demo-memory</module>
     </modules>
     <packaging>pom</packaging>
 
