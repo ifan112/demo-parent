@@ -15,6 +15,7 @@
         <module>demo-nacos-spring</module>
         <module>demo-netflix-ribbon</module>
         <module>demo-jersey</module>
+        <module>demo-webapp</module>
     </modules>
     <packaging>pom</packaging>
 
