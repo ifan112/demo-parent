@@ -17,6 +17,7 @@
         <module>demo-jersey</module>
         <module>demo-webapp</module>
         <module>demo-memory</module>
+        <module>demo-netflix-eureka</module>
     </modules>
     <packaging>pom</packaging>
 
