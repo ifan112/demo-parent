@@ -18,7 +18,7 @@ public class DemoJerseyApplication {
          */
         Client client = new ApacheHttpClient4();
 
-        WebResource webResource = client.resource("http://www.baidu.com");
+        WebResource webResource = client.resource("https://www.baidu.com");
 
         String s1 = webResource.get(String.class);
         System.out.println(s1);

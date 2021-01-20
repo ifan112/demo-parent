@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Assert;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Proxy;
@@ -23,8 +24,10 @@ public class DemoMybatisApplication {
 
     public static void main(String[] args) throws IOException {
         // mybatis配置文件
-        Path mybatisConfigPath = Paths.get("demo-mybatis/src/main/resources/mybatis-config.xml");
-        InputStream mybatisConfigIn = Files.newInputStream(mybatisConfigPath);
+        // Path mybatisConfigPath = Paths.get("classpath:mybatis-config.xml");
+        // InputStream mybatisConfigIn = Files.newInputStream(mybatisConfigPath);
+
+        InputStream mybatisConfigIn = DemoMybatisApplication.class.getClassLoader().getResourceAsStream("mybatis-config.xml");
 
         /*
          * mybatis从三处获取属性列表：
@@ -50,13 +53,13 @@ public class DemoMybatisApplication {
          *      {@link org.apache.ibatis.parsing.PropertyParser#parse(String, Properties)}
          */
         Properties customerProps = new Properties();
-        customerProps.setProperty("url", "jdbc:mysql://localhost:3306/test?useSSL=true");
+        customerProps.setProperty("url", "jdbc:mysql://127.0.0.1:3306/test");
 
         // 创建SqlSession工厂类
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(mybatisConfigIn, customerProps);
 
         // 获取一个SqlSession，一个到MySQL数据库的连接
-        SqlSession sqlSession = sqlSessionFactory.openSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 
         Assert.assertTrue("userMapper不是Jdk动态代理类！！", Proxy.isProxyClass(userMapper.getClass()));

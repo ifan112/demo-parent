@@ -18,6 +18,11 @@
         <module>demo-webapp</module>
         <module>demo-memory</module>
         <module>demo-netflix-eureka</module>
+        <module>demo-guava</module>
+        <module>demo-mockito</module>
+        <module>demo-h2database</module>
+        <module>demo-asm</module>
+        <module>demo-plugin</module>
     </modules>
     <packaging>pom</packaging>
 
