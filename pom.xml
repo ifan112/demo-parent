@@ -23,6 +23,7 @@
         <module>demo-h2database</module>
         <module>demo-asm</module>
         <module>demo-plugin</module>
+        <module>demo-jackson</module>
     </modules>
     <packaging>pom</packaging>
 
