@@ -24,6 +24,7 @@
         <module>demo-asm</module>
         <module>demo-plugin</module>
         <module>demo-jackson</module>
+        <module>demo-mapstruct</module>
     </modules>
     <packaging>pom</packaging>
 
