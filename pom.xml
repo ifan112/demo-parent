@@ -25,6 +25,7 @@
         <module>demo-plugin</module>
         <module>demo-jackson</module>
         <module>demo-mapstruct</module>
+        <module>demo-okhttp</module>
     </modules>
     <packaging>pom</packaging>
 
